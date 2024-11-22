@@ -9,12 +9,12 @@
     <div class="container">
     <div class="row py-4">
             <div class="col-12">
-                <h1 class="text-center">Modifca <span th:text="${deal.name}"></span></h1>
+                <h1 class="text-center">Aggiungi una nuova offerta</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-8">
-                <form class="row g-3" id="deal-form" th:object="${deal}" th:action="@{/deals/edit/{id}(id=${deal.id})}" method="post">
+                <form class="row g-3" id="deal-form" th:object="${deals}" th:action="@{/deals/create}" method="post">
                     <input type="hidden" th:field="*{pizza}" id="pizza">
                     <div class="col-6">
                         <label for="name" class="form-label">Nome</label>
@@ -56,7 +56,7 @@
                           </div>
                       </div>
                         <div class="col-12">
-                          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-edit"></i> MODIFICA</button>
+                          <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> AGGIUNGI</button>
                         </div>
                 </form>
             </div>

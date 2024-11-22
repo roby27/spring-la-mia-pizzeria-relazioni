@@ -78,6 +78,10 @@ public class Deal {
         this.price = price;
     }
 
+    public String getFormattedPrice() {
+        return String.format("%.2f €", price);
+    }
+
     public Pizza getPizza() {
         return pizza;
     }
