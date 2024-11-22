@@ -1,11 +1,14 @@
 package it.r27.pizzeria.model;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.URL;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +38,17 @@ public class Pizza {
     @NotBlank(message = "Il link non può essere vuoto.")
     @URL(protocol = "https", message = "Non hai inserito un URL valido (usa solo link con https)")
     private String image;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Deal> deals;
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public void setDeals(List<Deal> deals) {
+        this.deals = deals;
+    }
 
     public void setId(Long id) {
         this.id = id;

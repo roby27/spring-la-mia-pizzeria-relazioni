@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import it.r27.pizzeria.model.Deal;
 import it.r27.pizzeria.model.Pizza;
 import it.r27.pizzeria.repository.PizzaRepository;
 import jakarta.validation.Valid;
@@ -114,4 +115,16 @@ public class PizzaController {
 		return "redirect:/pizzeria";
 	}
 	
+	@GetMapping("/{id}/deals")
+	public String deal(@PathVariable Long id, Model model) {
+
+		Pizza pizza = pizzaRepo.findById(id).get();
+
+		Deal deal = new Deal();
+		deal.setPizza(pizza);
+
+		model.addAttribute("deals", deal);
+
+		return "deal/edit";
+	}
 }
