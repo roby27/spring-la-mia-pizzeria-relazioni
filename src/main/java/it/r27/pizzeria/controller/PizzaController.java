@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.r27.pizzeria.model.Deal;
 import it.r27.pizzeria.model.Pizza;
+import it.r27.pizzeria.repository.IngredientRepository;
 import it.r27.pizzeria.repository.PizzaRepository;
 import jakarta.validation.Valid;
 
@@ -29,6 +30,9 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository pizzaRepo;
+
+	@Autowired
+    private IngredientRepository ingredientRepo;
 
     @GetMapping
 	public String index(Model model, @RequestParam(name = "keyword", required = false) String keyword) {
@@ -70,6 +74,7 @@ public class PizzaController {
 	@GetMapping("/create")
 	public String create (Model model) {
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("allIngredients", ingredientRepo.findAll());
 		return "pizzeria/create";
 	}
 	
@@ -77,6 +82,7 @@ public class PizzaController {
 	public String store(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 		
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("allIngredients", ingredientRepo.findAll());
 			return "/pizzeria/create";
 		}
 
@@ -90,13 +96,15 @@ public class PizzaController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("pizza", pizzaRepo.findById(id).get());
-		return "/pizzeria/edit";
+		model.addAttribute("allIngredients", ingredientRepo.findAll());
+		return "pizzeria/edit";
 	}
 	
 	@PostMapping("/edit/{id}")
 	public String update(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
 		
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("allIngredients", ingredientRepo.findAll());
 			return "/pizzeria/edit";
 		}
 

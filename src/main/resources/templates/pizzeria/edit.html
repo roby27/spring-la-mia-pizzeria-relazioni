@@ -60,6 +60,14 @@
                         </div>
                     </div>
                     <div class="col-12">
+                        <h4>Categorie</h4>
+                        <div class="form-check" th:each="ing : ${allIngredients}">
+                            <input type="checkbox"  class="form-check-input" th:id="|ingredient_${ing.id}|"
+                            th:value="${ing.id}" th:field="*{ingredients}" th:errorClass="is-invalid"></input>
+                            <label class="form-check-label" th:for="|ingredient_${ing.id}|" th:text="${ing.ingredient}"></label>
+                        </div>
+                    </div>
+                    <div class="col-12">
                       <button type="submit" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i> AGGIORNA</button>
                       <form action="#" th:action="@{'/pizzeria/delete/{id}'(id=${pizza.id})}" method="post">
                         <button class="btn btn-danger" type="submit" id="submitButton" onclick="return confirm('Sei sicuro di voler proseguire?')"><i class="fa-solid fa-trash"></i> ELIMINA</button>
