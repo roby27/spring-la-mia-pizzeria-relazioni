@@ -125,6 +125,6 @@ public class PizzaController {
 
 		model.addAttribute("deals", deal);
 
-		return "deal/edit";
+		return "deal/create";
 	}
 }

@@ -2,6 +2,8 @@ package it.r27.pizzeria.model;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,10 +25,12 @@ public class Deal {
     @NotBlank(message = "Il nome dell'offerta non può essere vuoto.")
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Devi inserire la data di inizio.")
     @FutureOrPresent(message = "La data di inizio non può essere nel passato.")
     private LocalDate startDate;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotNull(message = "Devi inserire la data di fine.")
     @FutureOrPresent(message = "La data di fine non può essere nel passato.")
     private LocalDate endDate;
